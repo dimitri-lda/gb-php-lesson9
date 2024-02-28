@@ -8,6 +8,8 @@
               <th scope="col">Имя</th>
               <th scope="col">Фамилия</th>
               <th scope="col">День рождения</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +24,8 @@
                     <b>Не задан</b>
                   {% endif %}
               </td>
+              <td><input type="button" name="delete_user" class="delete-user" value="Удалить" /></td>
+              <td><input type="button" name="edit_user" class="delete-user" value="Редактировать" /></td>
             </tr>
             {% endfor %}
           </tbody>
