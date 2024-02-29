@@ -148,4 +148,18 @@ class User {
         $handler = Application::$storage->get()->prepare($sql);
         $handler->execute(['id' => $id]);
     }
+
+    public function isAdmin(): bool {
+        $idUser = $_SESSION['id_user'] ?? null;
+        if (!$idUser) {
+            return false;
+        }
+        $sql = "SELECT * FROM user_roles WHERE id_user = :id AND role = 'admin'";
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(['id' => $idUser]);
+        $result = $handler->fetch();
+
+        return (bool) $result['id_user'];
+    }
 }

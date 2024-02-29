@@ -8,8 +8,10 @@
               <th scope="col">Имя</th>
               <th scope="col">Фамилия</th>
               <th scope="col">День рождения</th>
+              {% if user.isAdmin() %}
               <th scope="col"></th>
               <th scope="col"></th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -24,9 +26,11 @@
                     <b>Не задан</b>
                   {% endif %}
               </td>
+              {% if user.isAdmin() %}
               <td><input type="button" name="delete_user" class="delete-user" value="Удалить"
                          data-url="/user/delete/{{ user.getUserId() }}" /></td>
               <td><a href="/user/edit/{{ user.getUserId() }}" type="button" >Редактировать</a></td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>
