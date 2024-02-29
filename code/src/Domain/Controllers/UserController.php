@@ -107,6 +107,23 @@ class UserController extends AbstractController {
                 ]);
     }
 
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function actionDelete(string $id): string {
+        $id = (int) $id;
+        if ($id && $id > 0) {
+            $user = new User();
+            if ($user->loadFromStorage($id)) {
+                $user->deleteFromStorage($id);
+            } else {
+                throw new \InvalidArgumentException("Пользователь не найден");
+            }
+        }
+
+        return true;
+    }
+
     public function actionAuth(): string {
         $render = new Render();
         

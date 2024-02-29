@@ -8,6 +8,8 @@
               <th scope="col">Имя</th>
               <th scope="col">Фамилия</th>
               <th scope="col">День рождения</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +24,9 @@
                     <b>Не задан</b>
                   {% endif %}
               </td>
+              <td><input type="button" name="delete_user" class="delete-user" value="Удалить"
+                         data-url="/user/delete/{{ user.getUserId() }}" /></td>
+              <td><a href="/user/edit/{{ user.getUserId() }}" type="button" >Редактировать</a></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -62,4 +67,18 @@
           
       });
     }, 10000);
+
+    $('.delete-user').click(function f() {
+      const url = $(this).data('url');
+      const row = $(this).closest('tr');
+      $.ajax({
+          method: 'GET',
+          url: url
+      }).done(function f(response) {
+          if (response) {
+            row.remove();
+            console.log('Пользователь удален');
+          }
+      });
+    });
 </script>
