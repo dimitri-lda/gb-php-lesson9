@@ -48,6 +48,7 @@ class Application {
             else {
                 $methodName = "index";
             }
+            $arg1 = isset($routeArray[3]) && $routeArray[3] != '' ? $routeArray[3] : null;
 
             $this->methodName = "action" . ucfirst($methodName);
 
@@ -56,9 +57,10 @@ class Application {
 
                 if($controllerInstance instanceof AbstractController){
                     if($this->checkAccessToMethod($controllerInstance, $this->methodName)){
+                        $args = $arg1 ? [$arg1] : [];
                         return call_user_func_array(
                             [$controllerInstance, $this->methodName],
-                            []
+                            $args
                         );
                     }
                     else{

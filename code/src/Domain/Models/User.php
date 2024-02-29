@@ -131,4 +131,21 @@ class User {
 
         return $userArray;
     }
+
+    public function loadFromStorage(int $id): bool {
+        $sql = "SELECT * FROM users WHERE id_user = :id";
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(['id' => $id]);
+        $result = $handler->fetch();
+
+        return (bool) $result['id_user'];
+    }
+
+    public function deleteFromStorage(int $id) {
+        $sql = "DELETE FROM users WHERE id_user = :id";
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(['id' => $id]);
+    }
 }
